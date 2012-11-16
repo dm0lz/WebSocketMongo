@@ -1,0 +1,48 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.3.2)
+    bson (1.7.1)
+    coderay (1.0.8)
+    cookiejar (0.3.0)
+    em-http-request (1.0.3)
+      addressable (>= 2.2.3)
+      cookiejar
+      em-socksify
+      eventmachine (>= 1.0.0.beta.4)
+      http_parser.rb (>= 0.5.3)
+    em-socksify (0.2.1)
+      eventmachine (>= 1.0.0.beta.4)
+    em-websocket (0.3.8)
+      addressable (>= 2.1.1)
+      eventmachine (>= 0.12.9)
+    em-websocket-client (0.1.1)
+      eventmachine
+      libwebsocket
+    em-websocket-request (0.0.7)
+      em-http-request (~> 1.0.0)
+    eventmachine (1.0.0)
+    http_parser.rb (0.5.3)
+    libwebsocket (0.1.5)
+      addressable
+    method_source (0.8.1)
+    mongo (1.7.1)
+      bson (~> 1.7.1)
+    pry (0.9.10)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.3.1)
+    slop (3.3.3)
+    term-ansicolor (1.0.7)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  em-websocket
+  em-websocket-client
+  em-websocket-request
+  eventmachine
+  mongo
+  pry
+  term-ansicolor
