@@ -3,24 +3,33 @@ require 'em-websocket-client'
 require 'mongo'
 require 'term/ansicolor'
 require 'pry'
+require 'json'
 
-class String; include Term::ANSIColor ; end
+
+class String; include Term::ANSIColor; end
 
 EventMachine.run {
 
   EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 8080) do |ws|
     
-    ws.onopen { puts "WebSocket connection open".blue }
+    ws.onopen { puts "\nWebSocket connection open".yellow }
 
-    ws.onclose { puts "Connection closed" }
+    ws.onclose { puts "WebSocket Connection closed".red }
 
     ws.onmessage do |msg|
-      puts "Received message: #{msg.red}"
+      puts "\nReceived message: #{msg.cyan}"
       @client = Mongo::Connection.new('localhost', 27017, :safe => true)
 			@db = @client['fetcher']
 			@coll = @db['test']
-
-			binding.pry    	
+      final = JSON.parse msg
+      id = final["properties"]["Item#id"].join
+      begin
+        @coll.insert(id => final)
+        puts "\nThe Tweet with id : #{id.to_s} has been inserted in mongo Database\n".green
+      rescue Exception => e 
+			  binding.pry    	
+        puts "Got a problem : #{e.message}".red
+      end
     end
 
   end
